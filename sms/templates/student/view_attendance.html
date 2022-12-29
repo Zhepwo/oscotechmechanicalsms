@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white p-2 -mb-8 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Attendance</h3>
+        <p>Dashboard / View Attendance</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row g-4">
+    <div class="col-sm-12" style="width: 100%;">
+      <div class="bg-light rounded h-100 p-4 mb-2">
+        <h6 class="mb-4">View Attendance</h6>
+        {% if action is None %}
+        <form method="post" action="?action=show_attendance">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Select Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              required
+            >
+              <option value="">Select Subject &#x25be;</option>
+
+              {% for i in subjects %}
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <br />
+
+          <button type="submit" class="btn btn-primary">Show Attendance</button>
+        </form>
+        {% else %}
+        <form>
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Select Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              required
+              disabled
+            >
+              <option value="{{i.id}}">{{get_subject}}</option>
+            </select>
+          </div>
+          <br />
+          <div class="col-12">
+            <div class="table-responsive">
+              <table
+                id="dataTable"
+                class="table table-striped display nowrap compact hover"
+                style="width: 100%;"
+              >
+                <thead style="background-color: #040a27;">
+                  <tr style="color: #41e2d5;">
+                    <th scope="col">Date</th>
+                    <th scope="col">Subject Name</th>
+                    <th scope="col">Session Year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in attendance_report %}
+                  <tr>
+                    <th scope="row">{{i.attendance_id.attendance_date}}</th>
+                    <td>
+                      {{i.attendance_id.subject_id.name}}
+                    </td>
+                    <td>
+                      {{i.attendance_id.session_year_id.session_start}} TO
+                      {{i.attendance_id.session_year_id.session_end}}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot style="background-color: #040a27;">
+                  <tr style="color: #41e2d5;">
+                    <th>Date</th>
+                    <th>Subject Name</th>
+                    <th>Session Year</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form End -->
+{% endblock %}

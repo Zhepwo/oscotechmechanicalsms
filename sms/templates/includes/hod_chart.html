@@ -1,0 +1,167 @@
+<div class="flex flex-col">
+  <!-- Stats Row Starts Here -->
+  <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
+    <!-- All Data Starts Here -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas id="all_data" style="width: 100%; max-width: 600px;"></canvas>
+
+        <script>
+          var xValues = ['Student', 'Staff', 'Course', 'Subject']
+          var yValues = [
+            '{{student_count}}',
+            '{{staff_count}}',
+            '{{course_count}}',
+            '{{subject_count}}',
+          ]
+          var barColors = ['#e46050', '#0dcaf0', '#ffc107', '#198754']
+
+          new Chart('all_data', {
+            type: 'pie',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'All Data',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- All Data Ends Here -->
+
+    <!-- Students Gender Starts Here -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <canvas
+          id="student_gender"
+          style="width: 100%; max-width: 500px;"
+        ></canvas>
+
+        <script>
+          var xValues = ['Boys', 'Girls']
+          var yValues = [
+            '{{student_gender_male}}',
+            '{{student_gender_female}}',
+            0,
+          ]
+          var barColors = ['#e46050', '#198754']
+
+          new Chart('student_gender', {
+            type: 'bar',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Number of Students',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- Students Gender Ends Here -->
+  </div>
+  <!-- /Stats Row Ends Here -->
+</div>
+
+<div class="flex flex-col">
+  <!-- Stats Row Starts Here -->
+  <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
+    <!-- Staffs and Students Charts Starts Here  -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas
+          id="staff_and_student"
+          style="width: 100%; max-width: 600px;"
+        ></canvas>
+
+        <script>
+          var xValues = ['Student', 'Staff']
+          var yValues = ['{{student_count}}', '{{staff_count}}']
+          var barColors = ['#e46050', '#0dcaf0']
+
+          new Chart('staff_and_student', {
+            type: 'doughnut',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Staff and Student',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- Staffs and Students Charts Ends Here  -->
+
+    <!-- Courses and Subjects Charts Starts Here -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <canvas
+          id="course_and_subject"
+          style="width: 100%; max-width: 500px;"
+        ></canvas>
+
+        <script>
+          var xValues = ['Course', 'Subject']
+          var yValues = ['{{course_count}}', '{{subject_count}}', 0]
+          var barColors = ['#ffc107', '#198754']
+
+          new Chart('course_and_subject', {
+            type: 'bar',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Course and Subject',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- Courses and Subjects Charts Ends Here -->
+  </div>
+  <!-- /Stats Row Ends Here -->
+</div>

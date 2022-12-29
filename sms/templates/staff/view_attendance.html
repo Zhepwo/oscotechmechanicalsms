@@ -1,0 +1,174 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white -mb-4 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Attendance</h3>
+        <p>Dashboard / View Attendance</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row g-4">
+    <div class="col-sm-12" style="width: 100%;">
+      <div class="bg-light rounded h-100 p-4 mb-2">
+        <h6 class="mb-4">View Attendance</h6>
+        {% if action is None %}
+
+        <form method="post" action="?action=view_attendance">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              required
+            >
+              <option value="" selected disabled>
+                Select Subject &#x25be;
+              </option>
+
+              {% for i in subject %}
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="session_year_id">Session Year</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="session_year_id"
+              id="session_year_id"
+              required
+            >
+              <option value="" selected disabled>
+                Select Session Year &#x25be;
+              </option>
+
+              {% for i in session_year %}
+              <option value="{{i.id}}">
+                {{i.session_start}} To {{i.session_end}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <br />
+          <div class="col-sm-12">
+            <label for="attendance_date" class="form-label">
+              Attendance Date
+            </label>
+            <input
+              class="form-control"
+              type="date"
+              id="attendance_date"
+              name="attendance_date"
+              required
+            />
+          </div>
+          <br />
+
+          <button type="submit" class="btn btn-primary">Show Students</button>
+        </form>
+
+        {% else %}
+        <form method="post" action="?action=view_attendance">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              disabled
+            >
+              <option value="{{i.id}}">{{get_subject}}</option>
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="session_year_id">Session Year</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="session_year_id"
+              id="session_year_id"
+              disabled
+            >
+              <option value="{{i.id}}">{{get_session_year}}</option>
+            </select>
+          </div>
+
+          <br />
+          <div class="col-sm-12">
+            <label for="attendance_date" class="form-label">
+              Attendance Date
+            </label>
+            <input
+              class="form-control"
+              type="date"
+              id="attendance_date"
+              name="attendance_date"
+              value="{{attendance_date}}"
+              disabled
+            />
+          </div>
+          <br />
+          <div class="col-12">
+            <div class="table-responsive">
+              <table
+                id="dataTable"
+                class="table table-striped display nowrap compact hover"
+                style="width: 100%;"
+              >
+                <thead style="background-color: #040a27;">
+                  <tr style="color: #41e2d5;">
+                    <th scope="col">Id</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in attendance_report %}
+                  <tr>
+                    <th scope="row">{{i.student_id.admin.id}}</th>
+                    <td>
+                      {{i.student_id.admin.first_name}}&nbsp;{{i.student_id.admin.last_name}}
+                    </td>
+                    <td>{{i.student_id.admin.email}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot style="background-color: #040a27;">
+                  <tr style="color: #41e2d5;">
+                    <th>Id</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form End -->
+{% endblock %}

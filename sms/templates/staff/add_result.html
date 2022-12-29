@@ -1,0 +1,160 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white -mb-4 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Result</h3>
+        <p>Dashboard / Add Result</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row g-4">
+    <div class="col-sm-12" style="width: 100%;">
+      <div class="bg-light rounded h-100 p-4 mb-2">
+        <h6 class="mb-4">Add Result</h6>
+
+        {% if action is None %}
+        <form method="post" action="?action=show_students">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              required
+            >
+              <option value="" selected disabled>
+                Select Subject &#x25be;
+              </option>
+
+              {% for i in subjects %}
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="session_year_id">Session Year</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="session_year_id"
+              id="session_year_id"
+              required
+            >
+              <option value="" selected disabled>
+                Select Session Year &#x25be;
+              </option>
+
+              {% for i in session_year %}
+              <option value="{{i.id}}">
+                {{i.session_start}} To {{i.session_end}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <br />
+
+          <button type="submit" class="btn btn-primary">Fetch Student</button>
+        </form>
+
+        {% else %}
+        <form method="post" action="{% url 'staff_save_result' %}">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label class="form-label" for="subject_id">Subject</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="subject_id"
+              id="subject_id"
+              required
+            >
+              <option value="{{get_subject.id}}">{{get_subject}}</option>
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="session_year_id">Session Year</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="session_year_id"
+              id="session_year_id"
+              required
+            >
+              <option value="{{get_session.id}}">
+                {{get_session}}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="student_id">Student List</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="student_id"
+              id="student_id"
+              required
+            >
+              {% for i in students %}
+              <option value="{{i.admin.id}}">
+                ID{{i.id}}: {{i.admin.first_name}} {{i.admin.last_name}}
+              </option>
+
+              {% endfor %}
+            </select>
+          </div>
+
+          <br />
+          <div class="col-sm-12">
+            <label for="assignment_mark" class="form-label">
+              Assignment Marks
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="assignment_mark"
+              name="assignment_mark"
+              required
+            />
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label for="exam_mark" class="form-label">
+              Exam Marks
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="exam_mark"
+              name="exam_mark"
+              required
+            />
+          </div>
+          <br />
+
+          <button type="submit" class="btn btn-primary">Add Result</button>
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form End -->
+{% endblock %}

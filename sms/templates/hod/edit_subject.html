@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white p-2 -mb-8 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Subject</h3>
+        <p>Dashboard / Edit Subject</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row g-4">
+    <div class="col-sm-12" style="width: 100%;">
+      <div class="bg-light rounded h-100 p-4 mb-2">
+        <h6 class="mb-4">Subject Information</h6>
+        <form method="post" action="{% url 'update_subject' %}">
+          {% csrf_token %}
+
+          <div class="col-sm-12">
+            <label for="subject_name" class="form-label">Subject Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subject_name"
+              name="subject_name"
+              value="{{subject.name}}"
+              required
+            />
+            <input
+              type="text"
+              class="form-control"
+              id="subject_id"
+              name="subject_id"
+              value="{{subject.id}}"
+              hidden
+              required
+            />
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="course_id">Course</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="course_id"
+              id="course_id"
+              required
+            >
+              <option value="">Select Course &#x25be;</option>
+
+              {% for i in course %}
+              <option value="{{i.id}}">{{i.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <br />
+          <div class="col-sm-12">
+            <label class="form-label" for="staff_id">Staff</label>
+            <select
+              class="form-control"
+              class="col-sm-12"
+              name="staff_id"
+              id="staff_id"
+              required
+            >
+              <option value="">Select Staff &#x25be;</option>
+
+              {% for i in staff %}
+              <option value="{{i.id}}">
+                {{i.admin.first_name}}&nbsp; {{i.admin.last_name}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <br />
+
+          <button type="submit" class="btn btn-primary">Update Subject</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form End -->
+{% endblock %}

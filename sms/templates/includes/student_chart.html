@@ -1,0 +1,200 @@
+<div class="flex flex-col">
+  <!-- Stats Row Starts Here -->
+  <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
+    <!-- All Data Starts Here -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas id="all_data" style="width: 100%; max-width: 600px;"></canvas>
+
+        <script>
+          var xValues = ['Total Attendance', 'Present', 'Absent', 'Subjects']
+          var yValues = [
+            '{{total_attendance}}',
+            '{{time_present}}',
+            '{{time_absent}}',
+            '{{subjects}}',
+          ]
+          var barColors = ['#e46050', '#0dcaf0', '#ffc107', '#198754']
+
+          new Chart('all_data', {
+            type: 'pie',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'All Data',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- All Data Ends Here -->
+
+    <!-- Attendance Starts Here -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <canvas id="attendance" style="width: 100%; max-width: 500px;"></canvas>
+
+        <script>
+          var xValues = ['Present', 'Absent']
+          var yValues = ['{{time_present}}', '{{time_absent}}', 0]
+          var barColors = ['#0dcaf0', '#ffc107']
+
+          new Chart('attendance', {
+            type: 'bar',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Attendance',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- AttendanceEnds Here -->
+  </div>
+  <!-- /Stats Row Ends Here -->
+</div>
+
+<div class="flex flex-col">
+  <!-- Stats Row Starts Here -->
+  <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
+    <!-- Present and Absent Charts Starts Here  -->
+    <div style="width: 500px !important;" class="p-4 flex flex-col">
+      <div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas
+          id="present_and_absent"
+          style="width: 100%; max-width: 600px;"
+        ></canvas>
+
+        <script>
+          var xValues = ['Present', 'Absent']
+          var yValues = ['{{time_present}}', '{{time_absent}}']
+          var barColors = ['#0dcaf0', '#ffc107']
+
+          new Chart('present_and_absent', {
+            type: 'doughnut',
+            data: {
+              labels: xValues,
+              datasets: [
+                {
+                  backgroundColor: barColors,
+                  data: yValues,
+                },
+              ],
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'Present and Absent',
+              },
+            },
+          })
+        </script>
+      </div>
+    </div>
+    <!-- Present and Absent Charts Ends Here  -->
+
+    <div>
+      <!-- Attendance and Subjects Charts Starts Here -->
+
+      <div style="width: 500px !important;" class="p-4 flex flex-col">
+        <div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+          <canvas
+            id="attendance_and_subjects"
+            style="width: 100%; max-width: 500px;"
+          ></canvas>
+
+          <script>
+            var xValues = ['Total Attendance', 'Subjects']
+            var yValues = ['{{total_attendance}}', '{{subjects}}', 0]
+            var barColors = ['#e46050', '#198754']
+
+            new Chart('attendance_and_subjects', {
+              type: 'bar',
+              data: {
+                labels: xValues,
+                datasets: [
+                  {
+                    backgroundColor: barColors,
+                    data: yValues,
+                  },
+                ],
+              },
+              options: {
+                legend: { display: false },
+                title: {
+                  display: true,
+                  text: 'Attendance and Subjects',
+                },
+              },
+            })
+          </script>
+        </div>
+      </div>
+
+      <!-- Attendance and Subjects Charts Ends Here -->
+    </div>
+  </div>
+  <!-- /Stats Row Ends Here -->
+</div>
+<!-- 
+<div style="width: 500px !important;" class="p-4 flex flex-col">
+  <div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <canvas
+      id="attendance_and_subjects"
+      style="width: 100%; max-width: 500px;"
+    ></canvas>
+
+    <script>
+      var xValues = ['Total Attendance', 'Subjects']
+      var yValues = ['{{total_attendance}}', '{{subjects}}', 0]
+      var barColors = ['#0dcaf0', '#ffc107']
+
+      new Chart('attendance_and_subjects', {
+        type: 'bar',
+        data: {
+          labels: xValues,
+          datasets: [
+            {
+              backgroundColor: barColors,
+              data: yValues,
+            },
+          ],
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Attendance and Subjects',
+          },
+        },
+      })
+    </script>
+  </div>
+</div> -->

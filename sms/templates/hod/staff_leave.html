@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% block content %}
+<div class="col-12">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white -mb-8 p-4 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Leave</h3>
+        <p>Dashboard / Staff Leave</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white rounded h-100 p-4">
+    <div class="table-responsive">
+      <table
+        id="dataTable"
+        class="table table-striped display nowrap compact hover"
+        style="width: 100%;"
+      >
+        <thead style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th scope="col">Id</th>
+            <th scope="col">Staff Name</th>
+            <th scope="col">Leave Date</th>
+            <th scope="col">Message</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in staff_leave %}
+          <tr>
+            <th scope="row">{{i.id}}</th>
+            <td>{{i.staff_id.admin.first_name}}</td>
+            <td>{{i.data}}</td>
+            <td>{{i.message}}</td>
+            <td>
+              {% if i.status == 0 %}
+              <a
+                href="{% url 'staff_approve_leave' i.id %}"
+                class="btn btn-success"
+              >
+                Approve
+              </a>
+              <a
+                href="{% url 'staff_disapprove_leave' i.id %}"
+                class="btn btn-danger"
+              >
+                Disapprove
+              </a>
+
+              {% elif i.status == 1%}
+              <button class="btn btn-success" disabled="disabled">
+                Approved
+              </button>
+
+              {% else %}
+              <button class="btn btn-warning" disabled="disabled">
+                Disapproved
+              </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th>Id</th>
+            <th>Staff Name</th>
+            <th>Leave Date</th>
+            <th>Message</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

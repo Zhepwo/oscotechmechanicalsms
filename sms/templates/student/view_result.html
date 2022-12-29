@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% block content %}
+<div class="col-12">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white -mb-8 p-4 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Result</h3>
+        <p>Dashboard / Result</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white rounded h-100 p-4">
+    <div class="table-responsive">
+      <table
+        id="dataTable"
+        class="table table-striped display nowrap compact hover"
+        style="width: 100%;"
+      >
+        <thead style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th scope="col">Id</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Assignment Marks</th>
+            <th scope="col">Exam Marks</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in result %}
+          <tr>
+            <th scope="row">{{i.id}}</th>
+            <td>{{i.subject_id.name}}</td>
+            <td>{{i.assignment_mark}}</td>
+            <td>{{i.exam_mark}}</td>
+            <td>
+              {% if total_marks >= 50 %}
+              <span
+                style="
+                  width: 80px;
+                  text-align: center;
+                  line-height: 20px;
+                  font-size: 16px;
+                "
+                class="badge badge-success"
+              >
+                PASS
+              </span>
+              {% else %}
+              <span
+                style="
+                  width: 80px;
+                  text-align: center;
+                  line-height: 20px;
+                  font-size: 16px;
+                "
+                class="badge badge-danger"
+              >
+                FAIL
+              </span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th>Id</th>
+            <th>Subject</th>
+            <th>Assignment Marks</th>
+            <th>Exam Marks</th>
+            <th>Status</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+<style>
+  .danger {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    font-size: 15px;
+    margin: 14px 0;
+  }
+  .success {
+    padding: 10px;
+    background-color: #138309;
+    color: white;
+    font-size: 15px;
+    margin: 14px 0;
+  }
+  .warning {
+    padding: 10px;
+    background-color: #b8b644;
+    color: white;
+    font-size: 15px;
+    margin: 14px 0;
+  }
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .closebtn:hover {
+    color: black;
+  }
+</style>
+
+<!-- error message start here -->
+{% if messages %}
+<!-- <ul class="messages"> -->
+{% for message in messages %} {% if message.tags == 'error' %}
+<!-- <li {% if message.tags %} class="{{message.tags}}" {% endif %}> -->
+<div class="danger">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">
+    &times;
+  </span>
+  <strong>{{ message }}</strong>
+</div>
+<!-- </li> -->
+{% endif %} {% endfor %}
+<!-- </ul> -->
+{% endif %}
+<!-- error message end here -->
+
+<!-- success message start here -->
+{% if messages %}
+<!-- <ul class="messages"> -->
+{% for message in messages %} {% if message.tags == 'success' %}
+<!-- <li {% if message.tags %} class="{{message.tags}}" {% endif %}> -->
+<div class="success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">
+    &times;
+  </span>
+  <strong>{{ message }}</strong>
+</div>
+<!-- </li> -->
+{% endif %} {% endfor %}
+<!-- </ul> -->
+{% endif %}
+<!-- success message end here -->
+
+<!-- warning message start here -->
+{% if messages %}
+<!-- <ul class="messages"> -->
+{% for message in messages %} {% if message.tags == 'warning' %}
+<!-- <li {% if message.tags %} class="{{message.tags}}" {% endif %}> -->
+<div class="warning">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">
+    &times;
+  </span>
+  <strong>{{ message }}</strong>
+</div>
+<!-- </li> -->
+{% endif %} {% endfor %}
+<!-- </ul> -->
+{% endif %}
+<!-- warning message end here -->

@@ -1,0 +1,405 @@
+{% load static %} {% load active_link_tags %}
+
+<div class="sidebar pb-3">
+  <nav class="navbar bg-light navbar-light">
+    <div class="w-100 p-1">
+      <div>
+        <a href="#" class="navbar-brand mx-1 mb-3">
+          <h3 class="text-primary">
+            <img
+              src="{% static 'img/logo.jpg' %}"
+              alt="School logo"
+              style="width: 40px; height: 40px;"
+            />
+            <p class="mt-2 -mb-8" style="font-size: 14px;">
+              OSCOTECH Mechanical SMS
+            </p>
+          </h3>
+        </a>
+      </div>
+
+      <div class="d-flex align-items-center mx-1 mb-4 mt-3">
+        <div class="position-relative">
+          {% if user.profile_pic == "" %}
+          <img
+            src="{% static '../media/media/profile_pic/profile_pic.jpg' %}"
+            alt="School logo"
+            style="width: 40px; height: 40px; border-radius: 100%;"
+          />
+          {% else %}
+          <img
+            src="/media/{{user.profile_pic}}"
+            alt="School logo"
+            style="width: 40px; height: 40px; border-radius: 100%;"
+          />
+          {% endif %}
+
+          <div
+            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"
+          ></div>
+        </div>
+
+        <div class="ms-3 mt-1">
+          <h6 class="mb-0">
+            {{user.first_name}}&nbsp;{{user.last_name}}
+          </h6>
+        </div>
+      </div>
+    </div>
+
+    {% if user.user_type == '1' %}
+
+    <div class="navbar-nav w-100 -mx-4" style="font-size: 12px;">
+      <div class="ml-4 mb-2">
+        <h5>Main Menu</h5>
+      </div>
+      <a
+        href="{% url 'hod_home' %}"
+        class="nav-item nav-link {% active_link 'hod_home' 'active' %}"
+      >
+        <i class="fa fa-tachometer-alt me-2"></i>
+        Dashboard
+      </a>
+      <div class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle {% active_link 'add_student' 'active' %} {% active_link 'view_student' 'active' %}"
+          data-bs-toggle="dropdown"
+        >
+          <i class="fa fa-user" aria-hidden="true"></i>
+          Students
+        </a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <a
+            href="{% url 'add_student' %}"
+            class="dropdown-item {% active_link 'add_student' 'active' %}"
+          >
+            Add Student
+          </a>
+          <a
+            href="{% url 'view_student' %}"
+            class="dropdown-item {% active_link 'view_student' 'active' %}"
+          >
+            View Student
+          </a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle {% active_link 'add_staff' 'active' %} {% active_link 'view_staff' 'active' %}"
+          data-bs-toggle="dropdown"
+        >
+          <i class="fa fa-user" aria-hidden="true"></i>
+          Staff
+        </a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <a
+            href="{% url 'add_staff' %}"
+            class="dropdown-item {% active_link 'add_staff' 'active' %}"
+          >
+            Add Staff
+          </a>
+          <a
+            href="{% url 'view_staff' %}"
+            class="dropdown-item {% active_link 'view_staff' 'active' %}"
+          >
+            View Staff
+          </a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle {% active_link 'add_course' 'active' %} {% active_link 'view_course' 'active' %}"
+          data-bs-toggle="dropdown"
+        >
+          <i class="fa fa-book" aria-hidden="true"></i>
+          Course
+        </a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <a
+            href="{% url 'add_course' %}"
+            class="dropdown-item {% active_link 'add_course' 'active' %}"
+          >
+            Add Course
+          </a>
+          <a
+            href="{% url 'view_course' %}"
+            class="dropdown-item {% active_link 'view_course' 'active' %}"
+          >
+            View Course
+          </a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle {% active_link 'add_subject' 'active' %} {% active_link 'view_subject' 'active' %}"
+          data-bs-toggle="dropdown"
+        >
+          <i class="fa fa-book" aria-hidden="true"></i>
+          Subject
+        </a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <a
+            href="{% url 'add_subject' %}"
+            class="dropdown-item {% active_link 'add_subject' 'active' %}"
+          >
+            Add Subject
+          </a>
+          <a
+            href="{% url 'view_subject' %}"
+            class="dropdown-item {% active_link 'view_subject' 'active' %}"
+          >
+            View Subject
+          </a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle {% active_link 'add_session' 'active' %} {% active_link 'view_session' 'active' %}"
+          data-bs-toggle="dropdown"
+        >
+          <i class="fa fa-calendar-times" aria-hidden="true"></i>
+          Session
+        </a>
+        <div class="dropdown-menu bg-transparent border-0">
+          <a
+            href="{% url 'add_session' %}"
+            class="dropdown-item {% active_link 'add_session' 'active' %}"
+          >
+            Add Session
+          </a>
+          <a
+            href="{% url 'view_session' %}"
+            class="dropdown-item {% active_link 'view_session' 'active' %}"
+          >
+            View Session
+          </a>
+        </div>
+      </div>
+      <li>
+        <a
+          href="{% url 'staff_send_notification' %}"
+          class="nav-item nav-link {% active_link 'staff_send_notification' 'active' %}"
+        >
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          Staff Notification
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'student_send_notification' %}"
+          class="nav-item nav-link {% active_link 'student_send_notification' 'active' %}"
+        >
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          Student Notification
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'view_attendance' %}"
+          class="nav-item nav-link {% active_link 'view_attendance' 'active' %}"
+        >
+          <i class="fa fa-clock" aria-hidden="true"></i>
+          View Attendance
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'staff_feedback_reply' %}"
+          class="nav-item nav-link {% active_link 'staff_feedback_reply' 'active' %}"
+        >
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          Staff Feedback
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'get_student_feedback' %}"
+          class="nav-item nav-link {% active_link 'get_student_feedback' 'active' %}"
+        >
+          <i class="fas fa-comments" aria-hidden="true"></i>
+          Student Feedback
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'staff_leave_view' %}"
+          class="nav-item nav-link {% active_link 'staff_leave_view' 'active' %}"
+        >
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          Staff Leave
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'student_leave_view' %}"
+          class="nav-item nav-link {% active_link 'student_leave_view' 'active' %}"
+        >
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          Student Leave
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'do_logout' %}"
+          class="nav-item nav-link {% active_link 'do_logout' 'active' %}"
+        >
+          <i class="fas fa-arrow-circle-left" aria-hidden="true"></i>
+          Logout
+        </a>
+      </li>
+    </div>
+    {% elif user.user_type == '2' %}
+    <div class="navbar-nav w-100 -mx-4" style="font-size: 12px;">
+      <div class="ml-4 mb-2">
+        <h5>Main Menu</h5>
+      </div>
+      <a
+        href="{% url 'staff_home' %}"
+        class="nav-item nav-link {% active_link 'staff_home' 'active' %}"
+      >
+        <i class="fa fa-tachometer-alt me-2"></i>
+        Dashboard
+      </a>
+      <li>
+        <a
+          href="{% url 'staff_take_attendance' %}"
+          class="nav-item nav-link {% active_link 'staff_take_attendance' 'active' %}"
+        >
+          <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+          Take Attendance
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'staff_view_attendance' %}"
+          class="nav-item nav-link {% active_link 'staff_view_attendance' 'active' %}"
+        >
+          <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+          View / Update Attendance
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'staff_add_result' %}"
+          class="nav-item nav-link {% active_link 'staff_add_result' 'active' %}"
+        >
+          <i class="fa fa-poll-h" aria-hidden="true"></i>
+          Add Result
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'staff_apply_leave' %}"
+          class="nav-item nav-link {% active_link 'staff_apply_leave' 'active' %}"
+        >
+          <i class="fa fa-envelope-open" aria-hidden="true"></i>
+          Apply for Leave
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'staff_feedback' %}"
+          class="nav-item nav-link {% active_link 'staff_feedback' 'active' %}"
+        >
+          <i class="fas fa-comments" aria-hidden="true"></i>
+          Send Feedback
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'notifications' %}"
+          class="nav-item nav-link {% active_link 'notifications' 'active' %}"
+        >
+          <i class="fas fa-bell" aria-hidden="true"></i>
+          Notification
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'do_logout' %}"
+          class="nav-item nav-link {% active_link 'do_logout' 'active' %}"
+        >
+          <i class="fas fa-arrow-circle-left" aria-hidden="true"></i>
+          Logout
+        </a>
+      </li>
+    </div>
+    {% else %}
+
+    <div class="navbar-nav w-100 -mx-4" style="font-size: 12px;">
+      <div class="ml-4 mb-2">
+        <h5>Main Menu</h5>
+      </div>
+      <a
+        href="{% url 'student_home' %}"
+        class="nav-item nav-link {% active_link 'student_home' 'active' %}"
+      >
+        <i class="fa fa-tachometer-alt me-2"></i>
+        Dashboard
+      </a>
+      <li>
+        <a
+          href="{% url 'student_view_attendance' %}"
+          class="nav-item nav-link {% active_link 'student_view_attendance' 'active' %}"
+        >
+          <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+          View Attendance
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'view_result' %}"
+          class="nav-item nav-link {% active_link 'view_result' 'active' %}"
+        >
+          <i class="fa fa-certificate" aria-hidden="true"></i>
+          View Result
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'student_leave' %}"
+          class="nav-item nav-link {% active_link 'student_leave' 'active' %}"
+        >
+          <i class="fa fa-pray" aria-hidden="true"></i>
+          Apply for Leave
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'student_feedback' %}"
+          class="nav-item nav-link {% active_link 'student_feedback' 'active' %}"
+        >
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          Send Feedback
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'student_notification' %}"
+          class="nav-item nav-link {% active_link 'student_notification' 'active' %}"
+        >
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          Notifications
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'do_logout' %}"
+          class="nav-item nav-link {% active_link 'do_logout' 'active' %}"
+        >
+          <i class="fas fa-arrow-circle-left" aria-hidden="true"></i>
+          Logout
+        </a>
+      </li>
+    </div>
+    {% endif %}
+  </nav>
+</div>

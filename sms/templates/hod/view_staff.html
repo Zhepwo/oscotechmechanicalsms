@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block content %}
+<div class="col-12">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white -mb-4 p-3 m-2 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Staff</h3>
+        <p>Dashboard / Staff</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded h-100 p-4">
+    <div class="table-responsive -mt-10">
+      <table
+        id="dataTable"
+        class="table table-striped display nowrap compact hover"
+        style="width: 100%;"
+      >
+        <thead style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th scope="col">Id</th>
+            <th scope="col">Staff Name</th>
+            <th scope="col">Email</th>
+
+            <th scope="col">Gender</th>
+            <th scope="col">Address</th>
+
+            <th scope="col">Created At</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in staff %}
+          <tr>
+            <th scope="row">{{i.id}}</th>
+            <td>
+              <img src="/media/{{i.admin.profile_pic}}" alt="profile_pic" />
+              {{i.admin.first_name}}&nbsp;{{i.admin.last_name}}
+            </td>
+            <td>{{i.admin.email}}</td>
+
+            <td>{{i.gender}}</td>
+            <td>{{i.address}}</td>
+
+            <td>{{i.created_at}}</td>
+            <td>{{i.updated_at}}</td>
+            <td>
+              <a href="{% url 'edit_staff' i.id %}">
+                <button
+                  type="button"
+                  style="color: white; border-radius: 5px; font-size: 16px;"
+                  class="p-1 m-1 w-20 bg-primary"
+                >
+                  Edit
+                </button>
+              </a>
+              <a href="{% url 'delete_staff' i.admin.id %}">
+                <button
+                  type="button"
+                  style="color: white; border-radius: 5px; font-size: 16px;"
+                  class="p-1 m-1 w-20 bg-danger"
+                >
+                  Delete
+                </button>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th>Id</th>
+            <th>Staff Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

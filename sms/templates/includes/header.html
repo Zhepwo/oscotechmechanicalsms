@@ -1,0 +1,138 @@
+{% load static %}
+<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+  <a href="#" class="navbar-brand d-flex d-lg-none me-4">
+    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+  </a>
+  <a href="#" class="sidebar-toggler flex-shrink-0">
+    <i class="fa fa-bars"></i>
+  </a>
+  <div class="mt-3 ml-3">
+    <h4>
+      Welcome
+      <span class="text-primary">
+        &nbsp;{{user.first_name}}&nbsp;{{user.last_name}}&nbsp;
+      </span>
+      {% if user.user_type == '1' %} (HOD) {% elif user.user_type == '2'%}
+      (Staff) {% else %} (Student) {% endif %} !
+    </h4>
+  </div>
+
+  <div class="navbar-nav align-items-center ms-auto">
+    <div class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-envelope me-lg-2"></i>
+        <span class="d-none d-lg-inline-flex">Message</span>
+      </a>
+      <div
+        class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+      >
+        <a href="#" class="dropdown-item">
+          <div class="d-flex align-items-center">
+            <div class="ms-2">
+              <h6 class="fw-normal mb-0">Faith send you a message</h6>
+              <small>15 minutes ago</small>
+            </div>
+          </div>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item">
+          <div class="d-flex align-items-center">
+            <div class="ms-2">
+              <h6 class="fw-normal mb-0">Faith send you a message</h6>
+              <small>15 minutes ago</small>
+            </div>
+          </div>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item">
+          <div class="d-flex align-items-center">
+            <div class="ms-2">
+              <h6 class="fw-normal mb-0">Faith send you a message</h6>
+              <small>15 minutes ago</small>
+            </div>
+          </div>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item text-center">See all message</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-bell me-lg-2"></i>
+        <span class="d-none d-lg-inline-flex">Notification</span>
+      </a>
+      <div
+        class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+      >
+        <a href="#" class="dropdown-item">
+          <h6 class="fw-normal mb-0">Profile updated</h6>
+          <small>15 minutes ago</small>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item">
+          <h6 class="fw-normal mb-0">New user added</h6>
+          <small>15 minutes ago</small>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item">
+          <h6 class="fw-normal mb-0">Password changed</h6>
+          <small>15 minutes ago</small>
+        </a>
+        <hr class="dropdown-divider" />
+        <a href="#" class="dropdown-item text-center">See all notifications</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        {% if user.profile_pic == "" %}
+        <img
+          src="{% static '../media/media/profile_pic/profile_pic.jpg' %}"
+          alt="user profile pic"
+          style="width: 40px; height: 40px; border-radius: 100%;"
+        />
+        {% else %}
+        <img
+          src="/media/{{user.profile_pic}}"
+          alt="user profile pic"
+          style="width: 40px; height: 40px; border-radius: 100%;"
+        />
+        {% endif %}
+
+        <span class="d-none d-lg-inline-flex">
+          &nbsp;{{user.first_name }}&nbsp; {{user.last_name}}&nbsp;
+        </span>
+      </a>
+
+      <div
+        class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0"
+      >
+        <h6 class="dropdown-item">
+          {% if user.profile_pic == "" %}
+          <img
+            src="{% static '../media/media/profile_pic/profile_pic.jpg' %}"
+            alt="user profile pic"
+            style="width: 40px; height: 40px;"
+          />
+          {% else %}
+          <img
+            src="/media/{{user.profile_pic}}"
+            alt="user profile pic"
+            style="width: 40px; height: 40px; border-radius: 100%;"
+          />
+          {% endif %} {% if user.user_type == '1' %}
+          <p>Head of Department</p>
+          {% elif user.user_type == '2' %}
+          <p>Staff</p>
+          {% else %}
+          <p>Student</p>
+          {% endif %}
+        </h6>
+        <a href="{% url 'profile' %}" class="dropdown-item">
+          My Profile Update
+        </a>
+        <a href="#" class="dropdown-item">Settings</a>
+        <a href="{% url 'do_logout' %}" class="dropdown-item">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>

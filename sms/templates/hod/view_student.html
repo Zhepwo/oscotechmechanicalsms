@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div class="col-12">
+  <div>
+    {% include 'includes/messages.html' %}
+  </div>
+  <div class="page-header bg-white p-4 -mb-8 w-100">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Student</h3>
+        <p>Dashboard / Student</p>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <button type="button">
+          <i class="fa fa-download">&nbsp;&nbsp;Download</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white rounded h-100 p-4">
+    <div class="table-responsive">
+      <table
+        id="dataTable"
+        class="table table-striped display nowrap compact hover"
+        style="width: 100%;"
+      >
+        <thead style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th>Id</th>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Session Year</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in student %}
+          <tr>
+            <th>{{i.id}}</th>
+            <td>
+              <img src="/media/{{i.admin.profile_pic}}" alt="profile_pic" />
+              {{i.admin.first_name}}&nbsp;{{i.admin.last_name}}
+            </td>
+            <td>{{i.admin.email}}</td>
+            <td>{{i.course_id.name}}</td>
+            <td>{{i.gender}}</td>
+            <td>{{i.address}}</td>
+            <td>
+              {{i.session_year_id.session_start}} To
+              {{i.session_year_id.session_end}}
+            </td>
+            <td>{{i.created_at}}</td>
+            <td>{{i.updated_at}}</td>
+            <td>
+              <a href="{% url 'edit_student' i.id %}">
+                <button
+                  type="button"
+                  style="color: white; border-radius: 5px; font-size: 16px;"
+                  class="p-1 m-1 w-20 bg-primary"
+                >
+                  Edit
+                </button>
+              </a>
+              <a href="{% url 'delete_student' i.admin.id %}">
+                <button
+                  type="button"
+                  style="color: white; border-radius: 5px; font-size: 16px;"
+                  class="p-1 m-1 w-20 bg-danger"
+                >
+                  Delete
+                </button>
+              </a>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+        <tfoot style="background-color: #040a27;">
+          <tr style="color: #41e2d5;">
+            <th>Id</th>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Session Year</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

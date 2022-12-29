@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col-sm-12" style="width: 100%;">
+      <p><h3><b>Update Profile</b></h3></p><br><h6>Profile / Update Profile</h6>
+      <div class="bg-light rounded h-100 p-4 mb-2">
+        <h6 class="mb-4">Profile Information</h6>
+        <form
+          method="post"
+          action="{% url 'profile_update' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div>{% include 'includes/messages.html' %}</div>
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              name="last_name"
+              value="{{user.last_name}}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              name="first_name"
+              value="{{user.first_name}}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              readonly
+              value="{{user.email}}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              readonly
+              value="{{user.username}}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Fill only if you want to change your password"
+              name="password"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="profile_pic" class="form-label">Profile Pic</label>
+            <input
+              class="form-control"
+              type="file"
+              id="profile_pic"
+              name="profile_pic"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form End -->
+{% endblock %}
